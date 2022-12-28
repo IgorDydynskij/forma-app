@@ -11,7 +11,7 @@ import {Helmet} from 'react-helmet-async';
 import {Search} from 'src/components/Search/Search';
 import {getUserEsims} from '../../../dataFromFirebase/index';
 import Link from "@mui/material/Link";
-import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
+import ReactMapboxGl, {Layer, Feature} from "react-map-gl";
 import './style.css'
 const CardCover = styled(Card)(
     ({theme}) => `
