@@ -48,7 +48,7 @@ function Countries() {
 
     const Map = ReactMapboxGl({
         accessToken:
-            "pk.eyJ1IjoiaXRlcmhpbSIsImEiOiJjbGM3b3g4ZW8wMXRjM3FvMmxqdmZzdXRoIn0.g6rq_3Pad8WuFPdpb1615g",
+            process.env.TOKEN,
 
     });
 
