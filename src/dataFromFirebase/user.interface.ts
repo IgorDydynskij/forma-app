@@ -2,7 +2,7 @@ export interface UserPurchases {
     id: string;
     name: string;
     description: string;
-    location: string;
+    location: object;
     video: string;
     image: string;
   };
