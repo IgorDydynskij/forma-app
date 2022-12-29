@@ -12,7 +12,10 @@ import {Search} from 'src/components/Search/Search';
 import {getUserEsims} from '../../../dataFromFirebase/index';
 import Link from "@mui/material/Link";
 import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
+// import Map from 'react-map-gl';
+
 import './style.css'
+
 const CardCover = styled(Card)(
     ({theme}) => `
     position: relative;
@@ -45,7 +48,7 @@ function Countries() {
             border: 0,
         },
     }));
-
+    //
     const Map = ReactMapboxGl({
         accessToken:
             "pk.eyJ1IjoiaXRlcmhpbSIsImEiOiJjbGM3b3g4ZW8wMXRjM3FvMmxqdmZzdXRoIn0.g6rq_3Pad8WuFPdpb1615g",
@@ -77,19 +80,10 @@ function Countries() {
                         </TableRow>
                         {countries.map((country, index) => {
                             let coordinate: [number, number] = [-77.0363700, 38.8951100]
-                            if (typeof country?.location === 'object' && country?.location['_long'] && country?.location['_lat']){
+                            if (typeof country?.location === 'object' && country?.location['_long'] && country?.location['_lat']) {
                                 coordinate[0] = country?.location['_long']
                                 coordinate[1] = country?.location['_lat']
                             }
-                            // typeof country?.location !== 'object'
-                            //     ? coordinates.push('0')
-                            //     : (country?.location['_long'] ? coordinates.push() : '0'
-                            //         &&  country?.location['_long'] ? coordinates.push() : '0')
-                            // let a = (country?.location
-                            //     ? null
-                            //         ? country?.location['_lat']
-                            //         : "#"
-                            //     : '#')
                             return <StyledTableRow hover key={index}>
 
                                 <TableCell style={{fontSize: 16}}>{country.id}</TableCell>
@@ -98,9 +92,21 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>{country.gender}</TableCell>
                                 <TableCell style={{fontSize: 16}}>{country.age}</TableCell>
                                 <TableCell style={{fontSize: 16}}>
+
+
+                                    {/*<Map*/}
+                                    {/*    initialViewState={{*/}
+                                    {/*        longitude: coordinate[0],*/}
+                                    {/*        latitude: coordinate[1],*/}
+                                    {/*        zoom: 3.5*/}
+                                    {/*    }}*/}
+                                    {/*    style={{width: 600, height: 400}}*/}
+                                    {/*    mapStyle="mapbox://styles/mapbox/streets-v9"*/}
+                                    {/*/>*/}
+
                                     <Map
                                         style="mapbox://styles/mapbox/streets-v9"
-                                        center = { coordinate }
+                                        center={coordinate}
                                         containerStyle={{
                                             height: "100%",
                                             width: "100%"
@@ -111,6 +117,8 @@ function Countries() {
                                             <Feature coordinates={[-0.481747846041145]}/>
                                         </Layer>
                                     </Map>
+
+
                                     {/*<Map*/}
                                     {/*    initialViewState={{*/}
                                     {/*        longitude:5,*/}
