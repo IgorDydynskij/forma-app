@@ -4,14 +4,12 @@ import {styled} from '@mui/material/styles';
 import Table from "@mui/material/Table/Table";
 import TableRow from "@mui/material/TableRow/TableRow";
 import TableCell from "@mui/material/TableCell/TableCell";
-import {CardMedia} from "@mui/material";
+import {CardMedia, Link} from "@mui/material";
 import TableBody from '@mui/material/TableBody/TableBody';
 import {Helmet} from 'react-helmet-async';
 
 import {Search} from 'src/components/Search/Search';
 import {getUserEsims} from '../../../dataFromFirebase/index';
-import Link from "@mui/material/Link";
-import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 import './style.css'
 const CardCover = styled(Card)(
     ({theme}) => `
@@ -46,11 +44,6 @@ function Countries() {
         },
     }));
 
-    const Map = ReactMapboxGl({
-        accessToken:
-            process.env.TOKEN,
-
-    });
 
     return (
         <>
@@ -76,10 +69,10 @@ function Countries() {
                             <TableCell style={{fontWeight: '700', fontSize: 16, color: 'white'}}>Video</TableCell>
                         </TableRow>
                         {countries.map((country, index) => {
-                            let coordinate: [number, number] = [-77.0363700, 38.8951100]
+                            let coordinate: [number, number] = [38.8951100, -77.0363700 ]
                             if (typeof country?.location === 'object' && country?.location['_long'] && country?.location['_lat']){
-                                coordinate[0] = country?.location['_long']
-                                coordinate[1] = country?.location['_lat']
+                                coordinate[0] = country?.location['_lat']
+                                coordinate[1] = country?.location['_long']
                             }
                             return <StyledTableRow hover key={index}>
 
@@ -89,41 +82,7 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>{country.gender}</TableCell>
                                 <TableCell style={{fontSize: 16}}>{country.age}</TableCell>
                                 <TableCell style={{fontSize: 16}}>
-                                    <Map
-                                        style="mapbox://styles/mapbox/streets-v9"
-                                        center = { coordinate }
-                                        containerStyle={{
-                                            height: "100%",
-                                            width: "100%"
-                                        }}
-                                    >
-
-                                        <Layer type="symbol" id="marker" layout={{"icon-image": "marker-15"}}>
-                                            <Feature coordinates={[-0.481747846041145]}/>
-                                        </Layer>
-                                    </Map>
-                                    {/*<Map*/}
-                                    {/*    initialViewState={{*/}
-                                    {/*        longitude:5,*/}
-                                    {/*        latitude:5,*/}
-                                    {/*        // longitude: !country?.location*/}
-                                    {/*        //*/}
-                                    {/*        //     ? null*/}
-                                    {/*        //         ? country?.location['_lat']*/}
-                                    {/*        //         : "#"*/}
-                                    {/*        //     : '#',*/}
-                                    {/*        // latitude: !country?.location*/}
-                                    {/*        //*/}
-                                    {/*        //     ? null*/}
-                                    {/*        //         ? country?.location['_long']*/}
-                                    {/*        //         : "#"*/}
-                                    {/*        //     : '#',*/}
-                                    {/*        zoom: 14*/}
-                                    {/*        //country?.location['_long']*/}
-                                    {/*    }}*/}
-                                    {/*    style={{width: 600, height: 400}}*/}
-                                    {/*    mapStyle="mapbox://styles/mapbox/streets-v9"*/}
-                                    {/*/>*/}
+                                    <Link target="_blank" href={`http://www.google.com/maps/place/${coordinate[0]},${coordinate[1]}`}>Link</Link>
                                 </TableCell>
                                 <TableCell style={{fontSize: 16}}>
                                     <CardCover>
