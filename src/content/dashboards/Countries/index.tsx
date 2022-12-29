@@ -98,7 +98,7 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>
                                     <
                                         CardMedia
-                                        style={{maxWidth: '16px'}}
+                                        style={{maxWidth: '150px'}}
                                         component="video"
                                         // autoPlay
                                         controls
