@@ -10,9 +10,12 @@ import {Helmet} from 'react-helmet-async';
 
 import {Search} from 'src/components/Search/Search';
 import {getUserEsims} from '../../../dataFromFirebase/index';
-import Link from "@mui/material/Link";
-import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
+
+import GoogleMapReact from 'google-map-react';
+
+
 import './style.css'
+
 const CardCover = styled(Card)(
     ({theme}) => `
     position: relative;
@@ -46,12 +49,18 @@ function Countries() {
         },
     }));
 
-    const Map = ReactMapboxGl({
-        accessToken:
-            process.env.TOKEN,
-
-    });
-
+    // const Map = ReactMapboxGl({
+    //     accessToken:
+    //         process.env.TOKEN,
+    //
+    // });
+    const defaultProps = {
+        center: {
+            lat: 10.99835602,
+            lng: 77.01502627
+        },
+        zoom: 11
+    };
     return (
         <>
             <Search
@@ -80,7 +89,9 @@ function Countries() {
                             if (typeof country?.location === 'object' && country?.location['_long'] && country?.location['_lat']){
                                 coordinate[0] = country?.location['_long']
                                 coordinate[1] = country?.location['_lat']
+                                defaultProps.center
                             }
+
                             return <StyledTableRow hover key={index}>
 
                                 <TableCell style={{fontSize: 16}}>{country.id}</TableCell>
@@ -89,41 +100,14 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>{country.gender}</TableCell>
                                 <TableCell style={{fontSize: 16}}>{country.age}</TableCell>
                                 <TableCell style={{fontSize: 16}}>
-                                    <Map
-                                        style="mapbox://styles/mapbox/streets-v9"
-                                        center = { coordinate }
-                                        containerStyle={{
-                                            height: "100%",
-                                            width: "100%"
-                                        }}
-                                    >
-
-                                        <Layer type="symbol" id="marker" layout={{"icon-image": "marker-15"}}>
-                                            <Feature coordinates={[-0.481747846041145]}/>
-                                        </Layer>
-                                    </Map>
-                                    {/*<Map*/}
-                                    {/*    initialViewState={{*/}
-                                    {/*        longitude:5,*/}
-                                    {/*        latitude:5,*/}
-                                    {/*        // longitude: !country?.location*/}
-                                    {/*        //*/}
-                                    {/*        //     ? null*/}
-                                    {/*        //         ? country?.location['_lat']*/}
-                                    {/*        //         : "#"*/}
-                                    {/*        //     : '#',*/}
-                                    {/*        // latitude: !country?.location*/}
-                                    {/*        //*/}
-                                    {/*        //     ? null*/}
-                                    {/*        //         ? country?.location['_long']*/}
-                                    {/*        //         : "#"*/}
-                                    {/*        //     : '#',*/}
-                                    {/*        zoom: 14*/}
-                                    {/*        //country?.location['_long']*/}
-                                    {/*    }}*/}
-                                    {/*    style={{width: 600, height: 400}}*/}
-                                    {/*    mapStyle="mapbox://styles/mapbox/streets-v9"*/}
-                                    {/*/>*/}
+                                    <div style={{ height: '100%', width: '100%' }}>
+                                        <GoogleMapReact
+                                            bootstrapURLKeys={{ key: "" }}
+                                            defaultCenter={defaultProps.center}
+                                            defaultZoom={defaultProps.zoom}
+                                        >
+                                        </GoogleMapReact>
+                                    </div>
                                 </TableCell>
                                 <TableCell style={{fontSize: 16}}>
                                     <CardCover>
