@@ -69,11 +69,18 @@ function Countries() {
                             <TableCell style={{fontWeight: '700', fontSize: 16, color: 'white'}}>Video</TableCell>
                         </TableRow>
                         {countries.map((country, index) => {
-                            let coordinate: [number, number] = [38.8951100, -77.0363700, ]
+                            let coordinate: [number, number] = [999, 999]
                             if (typeof country?.location === 'object' && country?.location['_long'] && country?.location['_lat']){
                                 coordinate[0] = country?.location['_lat']
                                 coordinate[1] = country?.location['_long']
                             }
+                            console.log(coordinate)
+
+                            let textLink: string = '#';
+                            let target: string = "_blank";
+                            ( coordinate[0] == 999 && coordinate[1] == 999 )
+                                ? target = ''
+                                : textLink = `http://www.google.com/maps/place/${coordinate[0]},${coordinate[1]}`;
                             return <StyledTableRow hover key={index}>
 
                                 <TableCell style={{fontSize: 16}}>{country.id}</TableCell>
@@ -82,7 +89,11 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>{country.gender}</TableCell>
                                 <TableCell style={{fontSize: 16}}>{country.age}</TableCell>
                                 <TableCell style={{fontSize: 16}}>
-                                    <Link target="_blank" href={`http://www.google.com/maps/place/${coordinate[0]},${coordinate[1]}`}>User location</Link>
+                                    <Link target ={target} href={textLink}>{
+                                        target
+                                        ?'User location'
+                                        :'Location not found'
+                                    }</Link>
                                 </TableCell>
                                 <TableCell style={{fontSize: 16}}>
                                     <CardCover>
@@ -98,7 +109,7 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>
                                     <
                                         CardMedia
-                                        style={{maxWidth: '150px'}}
+                                        style={{maxWidth: '200px'}}
                                         component="video"
                                         // autoPlay
                                         controls
