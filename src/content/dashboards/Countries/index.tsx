@@ -81,15 +81,6 @@ function Countries() {
                                 coordinate[0] = country?.location['_long']
                                 coordinate[1] = country?.location['_lat']
                             }
-                            // typeof country?.location !== 'object'
-                            //     ? coordinates.push('0')
-                            //     : (country?.location['_long'] ? coordinates.push() : '0'
-                            //         &&  country?.location['_long'] ? coordinates.push() : '0')
-                            // let a = (country?.location
-                            //     ? null
-                            //         ? country?.location['_lat']
-                            //         : "#"
-                            //     : '#')
                             return <StyledTableRow hover key={index}>
 
                                 <TableCell style={{fontSize: 16}}>{country.id}</TableCell>
