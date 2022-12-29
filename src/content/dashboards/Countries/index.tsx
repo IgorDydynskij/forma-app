@@ -82,7 +82,7 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>{country.gender}</TableCell>
                                 <TableCell style={{fontSize: 16}}>{country.age}</TableCell>
                                 <TableCell style={{fontSize: 16}}>
-                                    <Link target="_blank" href={`http://www.google.com/maps/place/${coordinate[0]},${coordinate[1]}`}>Link</Link>
+                                    <Link target="_blank" href={`http://www.google.com/maps/place/${coordinate[0]},${coordinate[1]}`}>User location</Link>
                                 </TableCell>
                                 <TableCell style={{fontSize: 16}}>
                                     <CardCover>
@@ -98,6 +98,7 @@ function Countries() {
                                 <TableCell style={{fontSize: 16}}>
                                     <
                                         CardMedia
+                                        style={{maxWidth: '16px'}}
                                         component="video"
                                         // autoPlay
                                         controls
