@@ -69,7 +69,7 @@ function Countries() {
                             <TableCell style={{fontWeight: '700', fontSize: 16, color: 'white'}}>Video</TableCell>
                         </TableRow>
                         {countries.map((country, index) => {
-                            let coordinate: [number, number] = [38.8951100, -77.0363700 ]
+                            let coordinate: [number, number] = [38.8951100, -77.0363700, ]
                             if (typeof country?.location === 'object' && country?.location['_long'] && country?.location['_lat']){
                                 coordinate[0] = country?.location['_lat']
                                 coordinate[1] = country?.location['_long']
